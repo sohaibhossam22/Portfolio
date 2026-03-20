@@ -64,47 +64,21 @@
             background: #D946EF; 
         }
         
-        /* تخصيص شكل زرار جوجل */
-        #google_translate_element {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 1000;
-        }
-        .goog-te-gadget-simple {
-            background-color: rgba(255, 255, 255, 0.05) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            padding: 8px 12px !important;
-            border-radius: 99px !important;
-            backdrop-filter: blur(5px) !important;
-            font-family: 'Cairo', sans-serif !important;
-            font-size: 14px !important;
-            cursor: pointer !important;
-            transition: all 0.3s !important;
-        }
-        .goog-te-gadget-simple:hover {
-            background-color: rgba(139, 92, 246, 0.1) !important;
-            border-color: rgba(139, 92, 246, 0.5) !important;
-            transform: translateY(-2px);
-        }
-        .goog-te-gadget-simple span {
-            color: #C4B5FD !important; /* لون النص - brand-light */
-        }
-        .goog-te-menu-value img {
-            display: none !important; /* إخفاء لوجو جوجل الصغير */
-        }
-        /* إخفاء شريط جوجل العلوي اللي بيظهر بعد الترجمة */
-        .goog-te-banner-frame.skiptranslate {
-            display: none !important;
-        }
-        body {
-            top: 0px !important;
-        }
+        /* إخفاء كل عناصر وشريط جوجل ترانسليت تماماً */
+        #google_translate_element { display: none !important; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+        .goog-text-highlight { background: none !important; box-shadow: none !important; }
     </style>
 </head>
 <body class="bg-brand-dark text-gray-300 font-sans antialiased overflow-x-hidden selection:bg-brand-primary selection:text-white">
+    
+    <div id="google_translate_element" style="display: none;"></div>
 
-    <div id="google_translate_element"></div>
+    <button id="custom-lang-toggle" class="fixed bottom-6 left-6 z-50 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md text-white font-bold text-lg w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_25px_rgba(217,70,239,0.5)] hover:-translate-y-1 cursor-pointer" title="Translate to English">
+        EN
+    </button>
 
     <nav class="fixed w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-white/5 transition-all duration-300">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -235,7 +209,6 @@
                             بناء واجهة مستخدم كاملة لمنصة تعليمية تستهدف طلاب كلية العلوم. تتضمن تقسيمات مرئية جذابة للأقسام (كيمياء، فيزياء، بيولوجي)، تصميم متجاوب 100%، أدوات مدمجة للطلاب مثل "مؤقت التركيز" (Focus Mode)، وتهيئة للربط مع قواعد البيانات لإدارة ملفات الطلاب.
                         </p>
                         <div class="flex gap-2 mb-4">
-                            
                             <a href="images/324a9b3f-2f9c-48fd-b9bf-669ab98491b2.png" class="lightbox-trigger block">
                                 <img src="images/324a9b3f-2f9c-48fd-b9bf-669ab98491b2.png" alt="Categories" title="أقسام الموقع" class="w-20 h-12 object-cover rounded border border-white/10 opacity-70 hover:opacity-100 cursor-pointer transition-opacity">
                             </a>
@@ -346,31 +319,71 @@
     </footer>
 
     <script type="text/javascript">
+        // 1. تهيئة جوجل ترانسليت في الخلفية
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'ar',
                 includedLanguages: 'en,ar',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                 autoDisplay: false
             }, 'google_translate_element');
         }
+
+        // 2. منطق الزرار المخصص
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('custom-lang-toggle');
+            
+            // دالة لمعرفة لغة الموقع الحالية من الكوكيز
+            const getTransCookie = () => {
+                const match = document.cookie.match(/(^|;) ?googtrans=([^;]*)(;|$)/);
+                return match ? match[2] : null;
+            };
+
+            // تظبيط شكل الزرار أول ما الصفحة تفتح
+            const currentLang = getTransCookie();
+            if (currentLang && currentLang.includes('/en')) {
+                toggleBtn.innerText = 'ع'; // لو الموقع بالإنجليزي، الزرار يعرض حرف 'ع'
+                toggleBtn.title = 'العودة للعربية';
+                // لتظبيط اتجاه الصفحة للإنجليزي
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+            } else {
+                toggleBtn.innerText = 'EN';
+                toggleBtn.title = 'Translate to English';
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+            }
+
+            // أمر التنفيذ لما اليوزر يدوس على الزرار
+            toggleBtn.addEventListener('click', () => {
+                const lang = getTransCookie();
+                // لو هو إنجليزي رجعه عربي، ولو عربي خليه إنجليزي
+                const targetLang = (lang && lang.includes('/en')) ? '/auto/ar' : '/auto/en';
+                
+                // حفظ الاختيار وإجبار جوجل على الترجمة
+                document.cookie = `googtrans=${targetLang}; path=/`;
+                document.cookie = `googtrans=${targetLang}; domain=.${location.hostname}; path=/`;
+                
+                // إعادة تحميل سريعة لتطبيق اللغة بشكل نظيف
+                window.location.reload();
+            });
+        });
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
-        // تشغيل خاصية فتح الصور (Lightbox)
-        const triggers = document.querySelectorAll('.lightbox-trigger');
+        document.addEventListener('DOMContentLoaded', () => {
+            const triggers = document.querySelectorAll('.lightbox-trigger');
 
-        triggers.forEach(trigger => {
-            trigger.addEventListener('click', function(e) {
-                e.preventDefault(); // منع اللينك من تغيير الصفحة
-                const imageUrl = this.getAttribute('href'); // جلب مسار الصورة
-                
-                // فتح الصورة في نافذة منبثقة مع تصميم مناسب للـ Dark Mode
-                const instance = basicLightbox.create(`
-                    <img src="${imageUrl}" class="max-w-[90vw] max-h-[90vh] rounded-lg shadow-[0_0_30px_rgba(139,92,246,0.3)] border-2 border-brand-primary/20">
-                `);
-                instance.show();
+            triggers.forEach(trigger => {
+                trigger.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                    const imageUrl = this.getAttribute('href'); 
+                    
+                    const instance = basicLightbox.create(`
+                        <img src="${imageUrl}" class="max-w-[90vw] max-h-[90vh] rounded-lg shadow-[0_0_30px_rgba(139,92,246,0.3)] border-2 border-brand-primary/20">
+                    `);
+                    instance.show();
+                });
             });
         });
     </script>
