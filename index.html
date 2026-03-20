@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>صهيب الشعراوي | مطور واجهات ومحلل بيانات</title>
     
-    <!-- Google Fonts: Cairo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -45,6 +42,9 @@
         }
     </script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.js"></script>
+    
     <style>
         html {
             scroll-behavior: smooth;
@@ -63,16 +63,53 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #D946EF; 
         }
+        
+        /* تخصيص شكل زرار جوجل */
+        #google_translate_element {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        .goog-te-gadget-simple {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            padding: 8px 12px !important;
+            border-radius: 99px !important;
+            backdrop-filter: blur(5px) !important;
+            font-family: 'Cairo', sans-serif !important;
+            font-size: 14px !important;
+            cursor: pointer !important;
+            transition: all 0.3s !important;
+        }
+        .goog-te-gadget-simple:hover {
+            background-color: rgba(139, 92, 246, 0.1) !important;
+            border-color: rgba(139, 92, 246, 0.5) !important;
+            transform: translateY(-2px);
+        }
+        .goog-te-gadget-simple span {
+            color: #C4B5FD !important; /* لون النص - brand-light */
+        }
+        .goog-te-menu-value img {
+            display: none !important; /* إخفاء لوجو جوجل الصغير */
+        }
+        /* إخفاء شريط جوجل العلوي اللي بيظهر بعد الترجمة */
+        .goog-te-banner-frame.skiptranslate {
+            display: none !important;
+        }
+        body {
+            top: 0px !important;
+        }
     </style>
 </head>
 <body class="bg-brand-dark text-gray-300 font-sans antialiased overflow-x-hidden selection:bg-brand-primary selection:text-white">
 
-    <!-- Navigation -->
+    <div id="google_translate_element"></div>
+
     <nav class="fixed w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-white/5 transition-all duration-300">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center gap-3 group">
                 <div class="p-1 rounded-lg shadow-[0_0_15px_rgba(139,92,246,0.3)] group-hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] border border-white/5 transition-all">
-                    <!-- Personal Logo -->
                     <img src="images/Gemini_Generated_Image_eh5nbeeh5nbeeh5n (3).png" alt="Sohaib Logo" class="h-10 w-10 object-contain drop-shadow-md">
                 </div>
                 <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-l from-white to-brand-light">صهيب الشعراوي</span>
@@ -90,16 +127,13 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <!-- Background Glow -->
         <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-primary/20 rounded-full blur-[120px] -z-10"></div>
         <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-accent/10 rounded-full blur-[120px] -z-10"></div>
 
         <div class="container mx-auto px-6">
             <div class="flex flex-col-reverse lg:flex-row items-center gap-12">
                 
-                <!-- Text Content -->
                 <div class="lg:w-1/2 text-center lg:text-right">
                     <h2 class="text-brand-light font-semibold tracking-wider mb-2">مرحباً بك، أنا</h2>
                     <h1 class="text-5xl lg:text-7xl font-bold text-white mb-4 leading-tight">صهيب الشعراوي</h1>
@@ -122,14 +156,11 @@
                     </div>
                 </div>
 
-                <!-- Profile Image -->
                 <div class="lg:w-1/2 flex justify-center relative">
                     <div class="relative w-72 h-72 md:w-96 md:h-96">
-                        <!-- Decorative ring -->
                         <div class="absolute inset-0 rounded-full border-2 border-brand-primary/30 animate-[spin_10s_linear_infinite]"></div>
                         <div class="absolute inset-4 rounded-full border border-brand-accent/30 animate-[spin_15s_linear_infinite_reverse]"></div>
                         
-                        <!-- Image Container -->
                         <div class="absolute inset-8 rounded-full overflow-hidden border-2 border-brand-primary/30 shadow-[0_0_50px_rgba(139,92,246,0.4)] animate-float">
                             <img src="images/481671756_3860130117588023_7294685112510351585_n.jpg" alt="Sohaib Elsharawy" class="w-full h-full object-cover">
                         </div>
@@ -139,7 +170,6 @@
         </div>
     </section>
 
-    <!-- Services Section -->
     <section id="services" class="py-20 bg-brand-card/50 relative border-y border-white/5">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -148,7 +178,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Service 1 -->
                 <div class="bg-brand-dark border border-white/5 p-8 rounded-2xl hover:-translate-y-2 hover:border-brand-primary/50 transition-all duration-300 group shadow-lg hover:shadow-[0_10px_30px_rgba(139,92,246,0.1)]">
                     <div class="w-16 h-16 bg-brand-primary/10 rounded-xl flex items-center justify-center text-brand-primary text-3xl mb-6 group-hover:bg-brand-primary group-hover:text-white transition-colors">
                         <i class="fa-solid fa-code"></i>
@@ -159,7 +188,6 @@
                     </p>
                 </div>
 
-                <!-- Service 2 -->
                 <div class="bg-brand-dark border border-white/5 p-8 rounded-2xl hover:-translate-y-2 hover:border-brand-accent/50 transition-all duration-300 group shadow-lg hover:shadow-[0_10px_30px_rgba(217,70,239,0.1)]">
                     <div class="w-16 h-16 bg-brand-accent/10 rounded-xl flex items-center justify-center text-brand-accent text-3xl mb-6 group-hover:bg-brand-accent group-hover:text-white transition-colors">
                         <i class="fa-solid fa-chart-pie"></i>
@@ -170,7 +198,6 @@
                     </p>
                 </div>
 
-                <!-- Service 3 -->
                 <div class="bg-brand-dark border border-white/5 p-8 rounded-2xl hover:-translate-y-2 hover:border-brand-primary/50 transition-all duration-300 group shadow-lg hover:shadow-[0_10px_30px_rgba(139,92,246,0.1)]">
                     <div class="w-16 h-16 bg-brand-primary/10 rounded-xl flex items-center justify-center text-brand-light text-3xl mb-6 group-hover:bg-brand-light group-hover:text-brand-dark transition-colors">
                         <i class="fa-solid fa-file-pen"></i>
@@ -184,7 +211,6 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
     <section id="portfolio" class="py-20 relative">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -193,25 +219,29 @@
                 <p class="text-gray-400 mt-4 max-w-2xl mx-auto">مجموعة من المشاريع الحقيقية التي نفذتها في مجالات تطوير الويب، تحليل البيانات، والتنسيق الأكاديمي.</p>
             </div>
 
-            <!-- Project Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 
-                <!-- Project 1: Science Box -->
                 <div class="bg-brand-card rounded-2xl overflow-hidden border border-white/5 group hover:border-brand-primary/30 transition-all">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="images/cc823f06-01e0-421a-933f-d2fb72780970.png" alt="Science Box Homepage" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
-                        <span class="absolute top-4 right-4 bg-brand-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg backdrop-blur-sm bg-opacity-90">Web Dev / CMS</span>
+                        <a href="images/cc823f06-01e0-421a-933f-d2fb72780970.png" class="lightbox-trigger block h-full">
+                            <img src="images/cc823f06-01e0-421a-933f-d2fb72780970.png" alt="Science Box Homepage" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
+                        </a>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-4 right-4 bg-brand-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg backdrop-blur-sm bg-opacity-90 pointer-events-none">Web Dev / CMS</span>
                     </div>
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-white mb-2">منصة Science Box</h3>
                         <p class="text-gray-400 mb-4 text-sm leading-relaxed">
                             بناء واجهة مستخدم كاملة لمنصة تعليمية تستهدف طلاب كلية العلوم. تتضمن تقسيمات مرئية جذابة للأقسام (كيمياء، فيزياء، بيولوجي)، تصميم متجاوب 100%، أدوات مدمجة للطلاب مثل "مؤقت التركيز" (Focus Mode)، وتهيئة للربط مع قواعد البيانات لإدارة ملفات الطلاب.
                         </p>
-                        <!-- Thumbnails for internal pages -->
                         <div class="flex gap-2 mb-4">
-                            <img src="images/324a9b3f-2f9c-48fd-b9bf-669ab98491b2.png" alt="Categories" title="أقسام الموقع" class="w-20 h-12 object-cover rounded border border-white/10 opacity-70 hover:opacity-100 cursor-pointer transition-opacity">
-                            <img src="images/39262823-59a0-42a5-913f-cd0c86a9655a.png" alt="Focus Timer" title="مؤقت التركيز المدمج" class="w-20 h-12 object-cover rounded border border-white/10 opacity-70 hover:opacity-100 cursor-pointer transition-opacity">
+                            
+                            <a href="images/324a9b3f-2f9c-48fd-b9bf-669ab98491b2.png" class="lightbox-trigger block">
+                                <img src="images/324a9b3f-2f9c-48fd-b9bf-669ab98491b2.png" alt="Categories" title="أقسام الموقع" class="w-20 h-12 object-cover rounded border border-white/10 opacity-70 hover:opacity-100 cursor-pointer transition-opacity">
+                            </a>
+                            <a href="images/39262823-59a0-42a5-913f-cd0c86a9655a.png" class="lightbox-trigger block">
+                                <img src="images/39262823-59a0-42a5-913f-cd0c86a9655a.png" alt="Focus Timer" title="مؤقت التركيز المدمج" class="w-20 h-12 object-cover rounded border border-white/10 opacity-70 hover:opacity-100 cursor-pointer transition-opacity">
+                            </a>
                         </div>
                         <div class="flex flex-wrap gap-2 text-xs text-brand-light font-semibold">
                             <span class="bg-white/5 px-2 py-1 rounded">HTML/CSS</span>
@@ -221,12 +251,13 @@
                     </div>
                 </div>
 
-                <!-- Project 2: Habit Tracker -->
                 <div class="bg-brand-card rounded-2xl overflow-hidden border border-white/5 group hover:border-brand-primary/30 transition-all">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="images/image.png" alt="Habit Tracker Dashboard" class="w-full h-full object-cover object-left-top transition-transform duration-700 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent"></div>
-                        <span class="absolute top-4 right-4 bg-brand-accent text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg backdrop-blur-sm bg-opacity-90">Data Analysis</span>
+                        <a href="images/image.png" class="lightbox-trigger block w-full h-full">
+                            <img src="images/image.png" alt="Habit Tracker Dashboard" class="w-full h-full object-cover object-left-top transition-transform duration-700 group-hover:scale-105">
+                        </a>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-4 right-4 bg-brand-accent text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg backdrop-blur-sm bg-opacity-90 pointer-events-none">Data Analysis</span>
                     </div>
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-white mb-2">لوحة تتبع العادات 2026</h3>
@@ -241,13 +272,16 @@
                     </div>
                 </div>
 
-                <!-- Project 3: LaTeX Formatting -->
                 <div class="bg-brand-card rounded-2xl overflow-hidden border border-white/5 group hover:border-brand-primary/30 transition-all">
                     <div class="relative h-64 overflow-hidden bg-white/5 flex gap-2 p-4">
-                        <img src="images/d81a5c06-41dd-4444-813a-b30cedb37985.png" alt="Data Base Exam" class="w-1/2 h-full object-cover object-top rounded shadow-md transition-transform duration-700 group-hover:-translate-y-2">
-                        <img src="images/7343c519-e46d-423d-9fcd-b0a298f347e2.png" alt="Math" class="w-1/2 h-full object-cover object-top rounded shadow-md transition-transform duration-700 group-hover:-translate-y-2 delay-75">
-                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-brand-card/20 to-transparent"></div>
-                        <span class="absolute top-4 right-4 bg-gray-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg backdrop-blur-sm bg-opacity-90">LaTeX & Academic</span>
+                        <a href="images/d81a5c06-41dd-4444-813a-b30cedb37985.png" class="lightbox-trigger block w-1/2 h-full">
+                            <img src="images/d81a5c06-41dd-4444-813a-b30cedb37985.png" alt="Data Base Exam" class="w-full h-full object-cover object-top rounded shadow-md transition-transform duration-700 group-hover:-translate-y-2">
+                        </a>
+                        <a href="images/7343c519-e46d-423d-9fcd-b0a298f347e2.png" class="lightbox-trigger block w-1/2 h-full">
+                            <img src="images/7343c519-e46d-423d-9fcd-b0a298f347e2.png" alt="Math" class="w-full h-full object-cover object-top rounded shadow-md transition-transform duration-700 group-hover:-translate-y-2 delay-75">
+                        </a>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-brand-card/20 to-transparent pointer-events-none"></div>
+                        <span class="absolute top-4 right-4 bg-gray-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg backdrop-blur-sm bg-opacity-90 pointer-events-none">LaTeX & Academic</span>
                     </div>
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-white mb-2">التنسيق الأكاديمي الاحترافي</h3>
@@ -266,11 +300,9 @@
         </div>
     </section>
 
-    <!-- Banner & Contact Section -->
     <section id="contact" class="py-20 relative bg-brand-dark border-t border-white/5">
         <div class="container mx-auto px-6">
             
-            <!-- Custom Banner Image Provided by User -->
             <div class="max-w-4xl mx-auto mb-16 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(139,92,246,0.2)] border border-brand-primary/20">
                 <img src="images/Gemini_Generated_Image_eqp4skeqp4skeqp4 (1).png" alt="Sohaib Elsharawy Banner" class="w-full h-auto object-cover">
             </div>
@@ -280,19 +312,16 @@
                 <p class="text-gray-400 mb-10 text-lg">أنا متاح دائماً لمناقشة المشاريع الجديدة، سواء كنت تحتاج إلى موقع ويب، تحليل بيانات معقدة، أو تنسيق أكاديمي لمستنداتك.</p>
                 
                 <div class="flex flex-wrap justify-center gap-6">
-                    <!-- WhatsApp -->
                     <a href="https://wa.me/201508620013" target="_blank" class="flex items-center gap-3 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white px-6 py-3 rounded-full transition-all duration-300 font-bold border border-[#25D366]/30">
                         <i class="fa-brands fa-whatsapp text-xl"></i>
                         <span>+201508620013</span>
                     </a>
                     
-                    <!-- Facebook -->
                     <a href="https://facebook.com/sohaibhossam1" target="_blank" class="flex items-center gap-3 bg-[#1877F2]/10 text-[#1877F2] hover:bg-[#1877F2] hover:text-white px-6 py-3 rounded-full transition-all duration-300 font-bold border border-[#1877F2]/30">
                         <i class="fa-brands fa-facebook-f text-xl"></i>
                         <span>sohaibhossam1</span>
                     </a>
 
-                    <!-- Instagram -->
                     <a href="https://instagram.com/sohaib_hossam" target="_blank" class="flex items-center gap-3 bg-[#E4405F]/10 text-[#E4405F] hover:bg-gradient-to-tr hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF] hover:text-white hover:border-transparent px-6 py-3 rounded-full transition-all duration-300 font-bold border border-[#E4405F]/30">
                         <i class="fa-brands fa-instagram text-xl"></i>
                         <span>sohaib_hossam</span>
@@ -302,7 +331,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-brand-card py-8 border-t border-white/5 text-center">
         <div class="container mx-auto px-6">
             <div class="flex justify-center items-center gap-2 mb-4">
@@ -316,6 +344,36 @@
             </p>
         </div>
     </footer>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ar',
+                includedLanguages: 'en,ar',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        // تشغيل خاصية فتح الصور (Lightbox)
+        const triggers = document.querySelectorAll('.lightbox-trigger');
+
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', function(e) {
+                e.preventDefault(); // منع اللينك من تغيير الصفحة
+                const imageUrl = this.getAttribute('href'); // جلب مسار الصورة
+                
+                // فتح الصورة في نافذة منبثقة مع تصميم مناسب للـ Dark Mode
+                const instance = basicLightbox.create(`
+                    <img src="${imageUrl}" class="max-w-[90vw] max-h-[90vh] rounded-lg shadow-[0_0_30px_rgba(139,92,246,0.3)] border-2 border-brand-primary/20">
+                `);
+                instance.show();
+            });
+        });
+    </script>
 
 </body>
 </html>
